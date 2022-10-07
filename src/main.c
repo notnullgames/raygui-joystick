@@ -45,8 +45,8 @@ bool js_ui(int index, bool control) {
         currentActive = -1;
         return true;
     }
-    
-    return control || (currentActive == index);
+
+    return false;
 }
 
 int main(void) {
