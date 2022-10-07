@@ -15,6 +15,7 @@ int emod(const int a, const int b) {
 
 int currentSelection = 0;
 int currentActive = -1;
+int currentDown = -1;
 int lastIndex = 0;
 bool js_ui(int index, bool control) {
     // find the top index the user asked for
@@ -25,7 +26,7 @@ bool js_ui(int index, bool control) {
     // control draws before GuiSetState, so we loop around with mod
     int i = emod(index + 1, lastIndex + 1);
 
-    if (i == currentActive) {
+    if (i == currentDown) {
         GuiSetState(STATE_PRESSED);
     } else {
         if (currentSelection == i) {
@@ -57,20 +58,25 @@ int main(void) {
         if (IsKeyPressed(KEY_DOWN)) {
             currentSelection = emod(currentSelection + 1, lastIndex + 1);
             currentActive = -1;
+            currentDown = -1;
         }
         if (IsKeyPressed(KEY_UP)) {
             currentSelection = emod(currentSelection - 1, lastIndex + 1);
             currentActive = -1;
+            currentDown = -1;
         }
         if (IsKeyPressed(KEY_Z)) {
             if (currentActive == currentSelection){
                 currentActive = -1;
+                currentDown = -1;
             } else {
                 currentActive = currentSelection;
+                currentDown = currentSelection;
             }
         }
         if (IsKeyReleased(KEY_Z)) {
             currentActive = -1;
+            currentDown = -1;
         }
 
         // TraceLog(LOG_INFO, "%d/%d", currentSelection, lastIndex);
