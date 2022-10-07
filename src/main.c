@@ -45,8 +45,7 @@ bool js_ui(int index, bool control) {
         currentActive = -1;
         return true;
     }
-
-    // TODO: debounce this like IsKeyPressed or GuiButton (1 true per up/down)
+    
     return control || (currentActive == index);
 }
 
